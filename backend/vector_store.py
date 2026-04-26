@@ -1,44 +1,35 @@
 # backend/vector_store.py
 
-# FAISS = Facebook AI Similarity Search (fast vector DB)
 from langchain_community.vectorstores import FAISS
+from langchain_huggingface import HuggingFaceEmbeddings
 
-# Embedding model (HuggingFace - free)
-from langchain_community.embeddings import HuggingFaceEmbeddings
-
-# Apna chunking logic import
 from text_splitter import split_documents
 from data_loader import load_all_data
 
 
 def create_vector_store():
-    """
-    Ye function:
-    1. Data load karega
-    2. Chunk karega
-    3. Embeddings banayega
-    4. Vector DB me store karega
-    """
+    print("🚀 Starting vector DB creation...")
 
-    # 🔹 Step 1: Load all documents
+    # Step 1: Load data
     documents = load_all_data()
+    print(f"📄 Loaded documents: {len(documents)}")
 
-    # 🔹 Step 2: Convert into chunks
+    # Step 2: Chunking
     chunks = split_documents(documents)
+    print(f"✂️ Chunks created: {len(chunks)}")
 
-    # 🔹 Step 3: Embedding model load karna
-    # ye free hai (OpenAI ka paisa nahi lagega)
+    # Step 3: Embeddings
     embeddings = HuggingFaceEmbeddings(
-        model_name="all-MiniLM-L6-v2"
+        model_name="sentence-transformers/all-MiniLM-L6-v2"
     )
 
-    # 🔹 Step 4: FAISS vector DB banana
+    # Step 4: Create FAISS DB
     vector_db = FAISS.from_documents(chunks, embeddings)
 
-    # 🔹 Step 5: Save locally (important)
+    # Step 5: Save
     vector_db.save_local("faiss_index")
 
-    print("\n✅ Vector DB created and saved successfully!")
+    print("✅ Vector DB created successfully!")
 
     return vector_db
 
