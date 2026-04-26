@@ -84,4 +84,4 @@ Q5: Are scholarships available?
 A: Yes, both merit-based and need-based scholarships are available.
 
 Q6: Which student is the brightest student of 2026 batch?
-A: Shivam Mishra of Data Science Branch.
+A: Shivam Mishra of Branch computer science(Data Science).
