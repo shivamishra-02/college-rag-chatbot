@@ -104,7 +104,7 @@ college-rag-chatbot/
 ### 1️⃣ Clone Repo
 
 ```bash
-git clone <your-repo-link>
+git clone https://github.com/shivamishra-02/college-rag-chatbot.git
 cd college-rag-chatbot
 ```
 
